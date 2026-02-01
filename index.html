@@ -133,11 +133,6 @@
     </div>
 </section>
 
-<div class="center-cta">
-    <button class="btn primary" onclick="openQuote()">Get a Quotation</button>
-    <button class="btn outline" onclick="openConsult()">Get a Consultation</button>
-</div>
-
 
 <!-- METALS -->
 <section id="metals" class="section">
@@ -164,7 +159,15 @@
         <p><strong>📧 Email:</strong> siddhivinayakasteelarts@gmail.com</p>
         <p><strong>🧾 GSTIN:</strong> 36AJGPC0681G2ZH</p>
 
-        <a href="mailto:siddhivinayakasteelarts@gmail.com" class="btn">Email Us</a>
+        <div class="contact-cta">    
+            <a href="mailto:siddhivinayakasteelarts@gmail.com
+            ?subject=Project%20Enquiry
+            &body=Hello%2C%0A%0AI%20would%20like%20to%20discuss%20a%20metal%20fabrication%20project.%0A%0AName%3A%0APhone%3A%0ALocation%3A"
+            class="btn primary">
+            Email Us
+            </a>
+
+        </div>
     </div>
 </section>
 
@@ -179,11 +182,22 @@
         <span class="close" onclick="closeQuote()">&times;</span>
         <h3>Get a Quotation</h3>
 
-        <form>
-            <input type="text" placeholder="Your Name" required>
-            <input type="tel" placeholder="Phone Number" required>
-            <input type="email" placeholder="Email">
-            <textarea placeholder="Project Details"></textarea>
+        <form 
+            name="quotation"
+            method="POST"
+            action="/thank-you"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+        >
+
+            <input type="hidden" name="form-name" value="quotation">
+            <input type="hidden" name="bot-field">
+
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="tel" name="phone" placeholder="Phone Number" required>
+            <input type="email" name="email" placeholder="Email">
+            <textarea name="project_details" placeholder="Project Details"></textarea>
+
             <button type="submit" class="btn primary">Submit</button>
         </form>
     </div>
@@ -195,12 +209,24 @@
         <span class="close" onclick="closeConsult()">&times;</span>
         <h3>Get a Consultation</h3>
 
-        <form>
-            <input type="text" placeholder="Your Name" required>
-            <input type="tel" placeholder="Phone Number" required>
-            <textarea placeholder="Briefly describe your requirement"></textarea>
+        <form 
+            name="consultation"
+            method="POST"
+            action="/thank-you"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+        >
+
+            <input type="hidden" name="form-name" value="consultation">
+            <input type="hidden" name="bot-field">
+
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="tel" name="phone" placeholder="Phone Number" required>
+            <textarea name="requirement" placeholder="Briefly describe your requirement"></textarea>
+
             <button type="submit" class="btn primary">Request Call</button>
         </form>
+
     </div>
 </div>
 
