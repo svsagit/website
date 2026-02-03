@@ -16,6 +16,7 @@
         <nav>
             <a href="#about">About</a>
             <a href="#projects">Projects</a>
+            <a href="#collections">Furniture Collection</a>
             <a href="#metals">Metals</a>
             <a href="#contact">Contact</a>
         </nav>
@@ -252,3 +253,73 @@ function closeConsult() {
 
 <form name="quotation" netlify hidden></form>
 <form name="consultation" netlify hidden></form>
+
+<!-- COLLECTIONS SECTION -->
+<section id="collections" class="section">
+  <div class="container">
+    <h3>Collections</h3>
+    <p class="section-sub">
+        Browse our furniture collection. Images load dynamically per category.
+    </p>
+
+    <p class="collections-note">
+        Available in MS, SS, and brass, with custom coatings or as per requirement.
+    </p>
+   
+    <!-- Tabs -->
+    <div class="collections-tabs">
+      <button class="tab-btn active" data-folder="centre_table">Centre Tables</button>
+      <button class="tab-btn" data-folder="console_table">Console Tables</button>
+      <button class="tab-btn" data-folder="side_table">Side Tables</button>
+      <button class="tab-btn" data-folder="dining_table">Dining Tables</button>
+      <button class="tab-btn" data-folder="partition">Partitions</button>
+    </div>
+
+    <!-- Gallery -->
+    <div id="collectionsGallery" class="collections-grid"></div>
+  </div>
+</section>
+
+<script>
+/* CONFIG */
+const BASE_PATH = 'final_pics';
+const IMAGE_COUNT = {
+  centre_table: 82,
+  console_table: 64,
+  side_table: 72,
+  dining_table: 60,
+  partition: 44
+};
+
+const gallery = document.getElementById('collectionsGallery');
+const buttons = document.querySelectorAll('.tab-btn');
+
+function loadCollection(folder) {
+  gallery.classList.add('fade-out');
+
+  setTimeout(() => {
+    gallery.innerHTML = '';
+
+    for (let i = 1; i <= IMAGE_COUNT[folder]; i++) {
+      const img = document.createElement('img');
+      img.src = `${BASE_PATH}/${folder}/${i}.jpg`;
+      img.loading = 'lazy';
+      gallery.appendChild(img);
+    }
+
+    gallery.classList.remove('fade-out');
+    gallery.classList.add('fade-in');
+  }, 250);
+}
+
+buttons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    loadCollection(btn.dataset.folder);
+  });
+});
+
+// Initial load
+loadCollection('centre_table');
+</script>

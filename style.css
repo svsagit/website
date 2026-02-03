@@ -246,7 +246,7 @@ footer {
     max-width: 700px;
     margin: 0 auto 50px;
     font-size: 15px;
-    color: #bbb;
+    color: #888;
 }
 
 /* GALLERY */
@@ -335,4 +335,71 @@ footer {
     text-align: center;        /* centers the button */
     padding: 14px 28px;
     font-size: 16px;
+}
+
+/* COLLECTIONS */
+#collections {
+  background: #fafafa;
+}
+
+.collections-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 40px 0 50px;
+}
+
+.tab-btn {
+  background: transparent;
+  border: 1px solid #ccc;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-btn:hover,
+.tab-btn.active {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 26px;
+}
+
+.collections-grid img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+  transition: transform 0.4s ease;
+}
+
+.collections-grid img:hover {
+  transform: scale(1.04);
+}
+
+/* Smooth swap */
+.fade-out {
+  opacity: 0;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+.collections-note {
+  text-align: center;
+  max-width: 800px;
+  margin: 10px auto 30px;
+  font-size: 16px;
+  color: #222;
 }
