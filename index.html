@@ -16,7 +16,7 @@
         <nav>
             <a href="#about">About</a>
             <a href="#projects">Projects</a>
-            <a href="#collections">Furniture Collection</a>
+            <a href="#collections">Collections</a>
             <a href="#metals">Metals</a>
             <a href="#contact">Contact</a>
         </nav>
@@ -247,9 +247,17 @@ function closeConsult() {
 }
 </script>
 
+<!-- IMAGE LIGHTBOX -->
+<div id="imageLightbox" class="lightbox">
+  <div class="lightbox-content">
+    <span class="lightbox-close">&times;</span>
 
-</body>
-</html>
+    <img id="lightboxImage" src="" alt="">
+    <div id="lightboxText" class="lightbox-text"></div>
+  </div>
+</div>
+
+
 
 <form name="quotation" netlify hidden></form>
 <form name="consultation" netlify hidden></form>
@@ -273,7 +281,13 @@ function closeConsult() {
       <button class="tab-btn" data-folder="side_table">Side Tables</button>
       <button class="tab-btn" data-folder="dining_table">Dining Tables</button>
       <button class="tab-btn" data-folder="partition">Partitions</button>
+      <button class="tab-btn" data-folder="gates">Gates</button>
+      <button class="tab-btn" data-folder="staircases">Staircases</button>
+      <button class="tab-btn" data-folder="railings">Railings</button>
+      <button class="tab-btn" data-folder="brass_works">Brass Works</button>
+      <button class="tab-btn" data-folder="custom_collections">Custom Collection</button>
     </div>
+
 
     <!-- Gallery -->
     <div id="collectionsGallery" class="collections-grid"></div>
@@ -281,6 +295,36 @@ function closeConsult() {
 </section>
 
 <script>
+const lightbox = document.getElementById('imageLightbox');
+const lightboxImg = document.getElementById('lightboxImage');
+const lightboxText = document.getElementById('lightboxText');
+const lightboxClose = document.querySelector('.lightbox-close');
+
+function formatFolderName(folder) {
+  return folder
+    .replace(/_/g, ' ')
+    .replace(/\b\w/g, c => c.toUpperCase());
+}
+
+function openLightbox(src, folder, index) {
+  lightboxImg.src = src;
+  lightboxText.textContent = `${formatFolderName(folder)} · ${index}`;
+  lightbox.classList.add('active');
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('active');
+}
+
+lightboxClose.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', e => {
+  if (e.target === lightbox) closeLightbox();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
+
 /* CONFIG */
 const BASE_PATH = 'final_pics';
 const IMAGE_COUNT = {
@@ -288,7 +332,13 @@ const IMAGE_COUNT = {
   console_table: 64,
   side_table: 72,
   dining_table: 60,
-  partition: 44
+  partition: 44,
+
+  staircases: 4,
+  railings: 4,
+  brass_works: 2,
+  custom_collections: 4,
+  gates: 2
 };
 
 const gallery = document.getElementById('collectionsGallery');
@@ -301,10 +351,17 @@ function loadCollection(folder) {
     gallery.innerHTML = '';
 
     for (let i = 1; i <= IMAGE_COUNT[folder]; i++) {
+      
       const img = document.createElement('img');
       img.src = `${BASE_PATH}/${folder}/${i}.jpg`;
       img.loading = 'lazy';
+
+      img.addEventListener('click', () => {
+      openLightbox(img.src, folder, i);
+      });
+
       gallery.appendChild(img);
+    
     }
 
     gallery.classList.remove('fade-out');
@@ -323,3 +380,6 @@ buttons.forEach(btn => {
 // Initial load
 loadCollection('centre_table');
 </script>
+
+</body>
+</html>
