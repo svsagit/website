@@ -483,3 +483,24 @@ footer {
 
   image-rendering: auto;
 }
+
+.btn.whatsapp {
+  background: #25D366;      /* WhatsApp green */
+  color: #fff;
+  border: none;
+}
+
+.btn.whatsapp:hover {
+  background: #1ebe5d;
+}
+
+.btn.emailus {
+  background: transparent;
+  border: 2px solid #111;
+  color: #111;
+}
+
+.btn.emailus:hover {
+  background: #111;
+  color: #fff;
+}
